@@ -134,10 +134,10 @@ function refreshtableau(x,y,i){
 
 function puissance4 (ligne, colonne, l, c){
 	if(c == 0 &&  l == 0){
-	console.log("valeur :" + nbrLignes + " " + nbrColonnes + " / increment " + l + " " + c);
+	console.log("valeur :" + ligne + " " + colonne + " / increment " + l + " " + c);
 		
 		//horizontal
-		var va = 1 + puissance4(ligne, colonne-1, 0, -1) + puissance4(ligne, colonne+1, 1, 0, 1);
+		var va = 1 + puissance4(ligne, colonne-1, 0, -1) + puissance4(ligne, colonne+1, 0, 1);
 
 		var vb = 1 + puissance4(ligne -1, colonne, -1, 0) + puissance4(ligne + 1,colonne, 1, 0);
 

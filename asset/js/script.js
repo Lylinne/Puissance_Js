@@ -95,8 +95,8 @@ function detectclick(j){
 		var verifend = puissance4(ligneEncours, j, 0, 0);
 		if (verifend) {
 			jeu = false;
-			affichetextannonce("Le joueur " + nomJoueur(numeroJoueur) + " a gagné la partie.")
-			affichetextannonce("C'est au tour du joueur "+ nomJoueur(numeroJoueur));
+			affichetextannonce("Le joueur " + nomJoueur(numeroJoueur) + " a gagné la partie.");
+			console.log("end of game !");
 		}else{
 			if (numeroJoueur == 1) {
 				numeroJoueur = 2;
@@ -133,6 +133,35 @@ function refreshtableau(x,y,i){
 }
 
 function puissance4 (ligne, colonne, l, c){
+	if(c == 0 &&  l == 0){
 	console.log("valeur :" + nbrLignes + " " + nbrColonnes + " / increment " + l + " " + c);
-	return false;
+		
+		//horizontal
+		var va = 1 + puissance4(ligne, colonne-1, 0, -1) + puissance4(ligne, colonne+1, 1, 0, 1);
+
+		var vb = 1 + puissance4(ligne -1, colonne, -1, 0) + puissance4(ligne + 1,colonne, 1, 0);
+
+		var vc = 1 + puissance4(ligne-1, colonne-1, -1, -1) + puissance4(ligne + 1,colonne + 1, 1, 1);
+
+		var vd = 1 + puissance4(ligne - 1, colonne + 1, -1, 1) + puissance4(ligne + 1,colonne - 1 , 1, -1);
+
+		console.log(va,vb,vc,vd);
+		if (va == 4 || vb == 4 || vc == 4 || vd == 4) {
+			return true;
+		}else{
+			return false;
+		}
+
+
+	}
+	if(ligne < nbrLignes && ligne >= 0 && colonne < nbrColonnes && colonne >=0){
+		console.log("recu valeurs : " + ligne + " " + colonne + "/ Increment "+ l + " " +c);
+		if (plateauJeu[ligne][colonne] == numeroJoueur) {
+			return 1 + puissance4(ligne + l, colonne + c, l, c);
+		}else{
+			return 0;
+		}
+	}
+
+	return 0;
 }
